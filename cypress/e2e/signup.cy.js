@@ -1,10 +1,10 @@
 describe('Sign up', () => {
 
     before(() => {
-        cy.exec('npx -w backend sequelize-cli db:seed:undo:all')
-            .its('code').should('eq', 0);
-        cy.exec('npx -w backend sequelize-cli db:seed:all')
-            .its('code').should('eq', 0);
+        cy.request({ method: 'POST', url: '/api/db/undo' })
+            .its('status').should('eq', 200);
+        cy.request({ method: 'POST', url: '/api/db/seed' })
+            .its('status').should('eq', 200);
     });
 
     beforeEach(() => {
